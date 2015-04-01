@@ -2,7 +2,8 @@
  * @jsx React.DOM
  */
 
-var React        = require('react');
+var React = require('react');
+var isEventSupported = require('react/lib/isEventSupported');
 var objectAssign = require('object-assign');
 
 var Resizeable = React.createClass({
@@ -76,7 +77,7 @@ var Resizeable = React.createClass({
   },
 
   render: function() {
-    var props = objectAssign({}, this.props, {onScroll: this.onScroll, ref: 'resizable'});
+    var props = objectAssign({}, this.props, {ref: 'resizable'}, isEventSupported('scroll', true) ? {onScroll: this.onScroll} : {});
     return (
       React.createElement('div', props,
         [
